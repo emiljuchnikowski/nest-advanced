@@ -14,8 +14,11 @@ import { PaymentsModule } from './payments/payments.module';
 import { DataSourceModule } from './data-source/data-source.module';
 import { UsersModule } from './users/users.module';
 import { AggregateByTenantContextIdStrategy } from './core/aggregate-by-tenant.strategy';
+import { I18nModule } from './i18n/i18n.module';
+import { AggregateByLocaleContextIdStrategy } from './core/aggregate-by-locale.strategy';
 
 ContextIdFactory.apply(new AggregateByTenantContextIdStrategy());
+ContextIdFactory.apply(new AggregateByLocaleContextIdStrategy());
 
 @Module({
   imports: [
@@ -28,7 +31,8 @@ ContextIdFactory.apply(new AggregateByTenantContextIdStrategy());
     PaymentsModule, // 👈
     EventEmitterModule.forRoot(),
     DataSourceModule,
-    UsersModule, // 👈 add EventEmitterModule
+    UsersModule,
+    I18nModule, // 👈 add EventEmitterModule
   ],
   controllers: [AppController],
   providers: [AppService],
